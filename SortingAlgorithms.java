@@ -16,4 +16,27 @@ public class SortingAlgorithms {
 
         return nums;
     }
+
+    public static Integer[] selectionSort(Integer[] nums) {
+        int l = nums.length;
+
+        for (int i = 0; i < l - 1; i++) {
+            int minIndex = i;
+
+            // finding min element of sub array
+            for (int j = i + 1; j < l; j++) {
+                if (nums[j] < nums[minIndex]) {
+                    minIndex = j;
+                }
+            }
+
+            // shifting min elements to left with swapping
+            int swap = nums[i];
+            nums[i] = nums[minIndex];
+            nums[minIndex] = swap;
+        }
+
+        return nums;
+    }
+
 }
