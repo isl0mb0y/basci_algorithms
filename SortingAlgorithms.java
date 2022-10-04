@@ -63,4 +63,70 @@ public class SortingAlgorithms {
         return nums;
     }
 
+    public static Integer[] mergeSort(Integer[] nums) {
+        // if recursion runs into base condition, then return array itself
+        if (nums.length == 1) {
+            return nums;
+        }
+        int l = nums.length;
+        int leftL = l/2;
+        int rightL = l - l/2;
+
+
+        /* conquering array */
+
+        // array for assigning left half of Array
+        Integer[] left = new Integer[leftL];
+
+        // array for assigning right half of Array
+        Integer[] right = new Integer[rightL];
+
+        // copy left half of array into left
+        System.arraycopy(nums, 0, left, 0, leftL);
+
+        // copy right half of array into right
+        System.arraycopy(nums, leftL, right, 0, rightL);
+
+        /* implement merge sort for conquered arrays*/
+
+        // recursive sort left half
+        left = mergeSort(left);
+
+        // recursive sort right half
+        right = mergeSort(right);
+
+        // merge with sorting left and right
+        return merge(left, right);
+
+    }
+
+    public static Integer[] merge(Integer[] left, Integer[] right) {
+        int leftLength = left.length;
+        int rightLength = right.length;
+        Integer[] result = new Integer[leftLength + rightLength];
+
+        int leftIndex = 0, rightIndex = 0, resultIndex = 0;
+
+        /* assign elements of left and right arrays descending order into result array  */
+        while (leftIndex < leftLength && rightIndex < rightLength) {
+            if (left[leftIndex] <= right[rightIndex]) {
+                result[resultIndex++] = left[leftIndex++];
+            } else {
+                result[resultIndex++] = right[rightIndex++];
+            }
+        }
+
+        // assign left remaining elements into result array
+        while (leftIndex < leftLength) {
+            result[resultIndex++] = left[leftIndex++];
+        }
+
+        // assign right remaining elements into result array
+        while (rightIndex < rightLength) {
+            result[resultIndex++] = right[rightIndex++];
+        }
+
+        return result;
+    }
+
 }
