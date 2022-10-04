@@ -3,7 +3,7 @@
  * Date: 04/10/2022
  */
 public class SortingAlgorithms {
-    public static Integer[] bubbleSort(Integer[] nums) {
+    public static int[] bubbleSort(int[] nums) {
         // assigning length of array
         int l = nums.length;
 
@@ -11,9 +11,7 @@ public class SortingAlgorithms {
             for (int j = 0; j < l - i - 1; j++) {
                 // if current element greater than next element, swap them
                 if (nums[j] > nums[j+1]) {
-                    int swap = nums[j];
-                    nums[j] = nums[j+1];
-                    nums[j+1] = swap;
+                    swap(nums, j, j+1);
                 }
             }
         }
@@ -21,7 +19,7 @@ public class SortingAlgorithms {
         return nums;
     }
 
-    public static Integer[] selectionSort(Integer[] nums) {
+    public static int[] selectionSort(int[] nums) {
         int l = nums.length;
 
         for (int i = 0; i < l - 1; i++) {
@@ -35,16 +33,14 @@ public class SortingAlgorithms {
             }
 
             // shifting min elements to left with swapping
-            int swap = nums[i];
-            nums[i] = nums[minIndex];
-            nums[minIndex] = swap;
+            swap(nums, i, minIndex);
         }
 
         return nums;
     }
 
     // 100,-2, 45, 0, -9, 200, 11, -9, 9
-    public static Integer[] insertionSort(Integer[] nums) {
+    public static int[] insertionSort(int[] nums) {
         int l = nums.length;
 
         for (int i = 1; i < l; i++) {
@@ -67,7 +63,7 @@ public class SortingAlgorithms {
         return nums;
     }
 
-    public static Integer[] mergeSort(Integer[] nums) {
+    public static int[] mergeSort(int[] nums) {
         // if recursion runs into base condition, then return array itself
         if (nums.length == 1) {
             return nums;
@@ -80,10 +76,10 @@ public class SortingAlgorithms {
         /* conquering array */
 
         // array for assigning left half of Array
-        Integer[] left = new Integer[leftL];
+        int[] left = new int[leftL];
 
         // array for assigning right half of Array
-        Integer[] right = new Integer[rightL];
+        int[] right = new int[rightL];
 
         // copy left half of array into left
         System.arraycopy(nums, 0, left, 0, leftL);
@@ -104,10 +100,10 @@ public class SortingAlgorithms {
 
     }
 
-    public static Integer[] merge(Integer[] left, Integer[] right) {
+    public static int[] merge(int[] left, int[] right) {
         int leftLength = left.length;
         int rightLength = right.length;
-        Integer[] result = new Integer[leftLength + rightLength];
+        int[] result = new int[leftLength + rightLength];
 
         int leftIndex = 0, rightIndex = 0, resultIndex = 0;
 
@@ -132,5 +128,47 @@ public class SortingAlgorithms {
 
         return result;
     }
+
+    public static void quickSort(int[] nums) {
+        quickSort(nums, 0, nums.length - 1);
+    }
+
+    public static void quickSort(int[] nums, int start, int end) {
+        if (start < end) {
+            // identifying pivot index
+            int pivotIndex = partition(nums, start, end);
+            /* divide and conquer*/
+            quickSort(nums, start, pivotIndex - 1);
+            quickSort(nums, pivotIndex + 1, end);
+        }
+    }
+
+    public static int partition(int[] nums, int start, int end) {
+        // declaring pointer
+        int pointer = start;
+        // let's consider that pivot value is the last element of array
+        int pivotValue = nums[end];
+
+        // partitioning
+        for (int i = start; i < end; i++) {
+            // if current value is lesser than pivot value, then swap it with pointer element, and increment pointer
+            if (nums[i] < pivotValue) {
+                swap(nums, i, pointer);
+                pointer++;
+            }
+        }
+
+        // place the end element onto the index where all left elements are lesser than pivot value and all right elements are greater than pivot value
+        swap(nums, pointer, end);
+
+        return pointer;
+    }
+
+    public static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
 
 }
