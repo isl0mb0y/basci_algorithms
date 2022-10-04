@@ -1,3 +1,7 @@
+/**
+ * Created By Islombek Mamatkulov
+ * Date: 04/10/2022
+ */
 public class SortingAlgorithms {
     public static Integer[] bubbleSort(Integer[] nums) {
         // assigning length of array

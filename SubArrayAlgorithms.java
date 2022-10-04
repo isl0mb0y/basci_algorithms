@@ -1,3 +1,7 @@
+/**
+ * Created By Islombek Mamatkulov
+ * Date: 04/10/2022
+ */
 public class SubArrayAlgorithms {
     // O(n^3) => cubic
     public int maxConsecutiveSubArraySumCubic(int nums[]) {
