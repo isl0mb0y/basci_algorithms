@@ -39,4 +39,28 @@ public class SortingAlgorithms {
         return nums;
     }
 
+    // 100,-2, 45, 0, -9, 200, 11, -9, 9
+    public static Integer[] insertionSort(Integer[] nums) {
+        int l = nums.length;
+
+        for (int i = 1; i < l; i++) {
+
+            // selecting second element of array for inserting
+            int selectedElement = nums[i];
+            int j = i - 1;
+
+            // if selectedElement is lesser than previous element continue shifting to right previous element to right
+            while (0 <= j && selectedElement < nums[j]) {
+                nums[j + 1] = nums[j];
+                j--;
+            }
+
+            // after shifting greater elements to right,
+            // insert the selected element after the first element lesser than selected element
+            nums[j + 1] = selectedElement;
+        }
+
+        return nums;
+    }
+
 }
